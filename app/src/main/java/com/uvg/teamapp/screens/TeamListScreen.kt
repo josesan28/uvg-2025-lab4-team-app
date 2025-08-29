@@ -29,7 +29,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.uvg.teamapp.R
 import com.uvg.teamapp.data.FakeTeamRepository
-import com.uvg.teamapp.model.TeamMember
+import com.uvg.teamapp.model.respository.TeamMember
 
 
 @Composable
