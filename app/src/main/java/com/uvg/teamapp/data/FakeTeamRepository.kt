@@ -1,10 +1,6 @@
 package com.uvg.teamapp.data
 
-// Data class temporal - Luego se borrará
-data class TeamMember(
-    val name: String,
-    val description: String
-)
+import com.uvg.teamapp.model.TeamMember
 
 class FakeTeamRepository {
     fun getTeamMembers(): List<TeamMember> {
@@ -22,5 +18,8 @@ class FakeTeamRepository {
                 description = "Nacido en Ciudad de Guatemala, le gustan los videojuegos"
             ),
         )
+    }
+    fun findMemberByName(name: String): TeamMember? {
+        return getTeamMembers().find { it.name.equals(name, ignoreCase = true) }
     }
 }

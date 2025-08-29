@@ -1,0 +1,49 @@
+package com.uvg.teamapp.navigation
+
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
+import com.uvg.teamapp.data.FakeTeamRepository
+import com.uvg.teamapp.screens.TeamDetailScreen
+import com.uvg.teamapp.screens.TeamListScreen
+
+
+
+@Preview
+@Composable
+fun AppNavigation(
+    navController: NavHostController = rememberNavController(),
+    modifier: Modifier = Modifier,
+    members: FakeTeamRepository = FakeTeamRepository()
+) {
+    NavHost(
+        navController = navController,
+        startDestination = "team_list",
+        modifier = modifier
+    ) {
+        composable("team_list") {
+            TeamListScreen(
+                onMemberClick = { member ->
+                    navController.navigate("team_detail/${member.name}")
+                },
+                members = members
+            )
+        }
+
+        composable("team_detail/{memberName}") { backStackEntry ->
+            val memberName = backStackEntry.arguments?.getString("memberName") ?: ""
+            val member = members.findMemberByName(memberName)
+
+            member?.let {
+                TeamDetailScreen(
+                    member = it,
+                    onBackClick = { navController.navigateUp() }
+                )
+            }
+        }
+    }
+}
