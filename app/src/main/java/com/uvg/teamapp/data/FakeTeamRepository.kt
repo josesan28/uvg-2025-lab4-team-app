@@ -1,6 +1,6 @@
 package com.uvg.teamapp.data
 
-import com.uvg.teamapp.model.TeamMember
+import com.uvg.teamapp.model.respository.TeamMember
 
 class FakeTeamRepository {
     fun getTeamMembers(): List<TeamMember> {
